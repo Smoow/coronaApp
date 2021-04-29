@@ -2,6 +2,8 @@ package App;
 
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Paciente extends Usuario {
     public Paciente(String user, String pass) {
@@ -21,9 +23,23 @@ public class Paciente extends Usuario {
         }
     }
 
+    public void setUser(String user) {
+        this.username = user;
+    }
+
+    public void setPass(String pass) {
+        this.password = pass;
+    }
+
+    public String getUser() {
+        return this.username;
+    }
+
     public void getInfo() {
         System.out.printf("ID: %d\n", this.id);
         System.out.printf("Name: %s\n", this.username);
         System.out.printf("Pass: %s\n\n", this.password);
     }
+
+
 }

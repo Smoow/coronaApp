@@ -1,12 +1,17 @@
 package App;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 import static java.lang.Thread.sleep;
 
 public class Main {
     public static void main(String[] args) throws IOException, InterruptedException {
+        Login l1 = new Login();
+        Register r1 = new Register();
+        ArrayList<Paciente> pacienteArrayList = new ArrayList<>();
+
         // Contas testes
         Paciente p1 = new Paciente("Pedro", "4414");
         Paciente p2 = new Paciente("Jose", "nova_senha");
@@ -30,7 +35,6 @@ public class Main {
                     int register = 0;
                     int logged = 0;
 
-                    Login l1 = new Login();
                     logged = l1.run();
 
                     if (logged == 1) {
@@ -39,12 +43,8 @@ public class Main {
                     }
 
                     register = menu.askRegister();
-
-
-
                     switch (register) {
                         case 1:
-                            System.out.println("Implementar CADASTRO");
                             break;
 
                         case 2:
@@ -53,7 +53,18 @@ public class Main {
                             return;
                     }
 
+                    // Caso Registrar
+                case 2:
+                    ArrayList<Paciente> returningList = r1.addPaciente(sc1, pacienteArrayList);
+                    if (returningList != null) {
+                        pacienteArrayList = returningList;
+                    }
+                    break;
 
+
+                default:
+                    System.out.println("Opcao invalida...\nRetornando ao menu inicial.");
+                    sleep(1000);
             }
 
 
@@ -61,4 +72,6 @@ public class Main {
 
 
     }
+
+
 }
