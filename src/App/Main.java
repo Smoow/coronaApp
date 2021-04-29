@@ -34,6 +34,8 @@ public class Main {
                     account = l1.state();
                     if (account == 1) {
                         logged = l1.runPaciente();
+                        menu.showSymptoms();
+                        menu.getSymptoms();
                     } else {
                         logged = l1.runSaude();
                     }

@@ -33,7 +33,7 @@ public class Login {
                 }
         }
     }
-    public int runPaciente() throws IOException {
+    public int runPaciente() throws IOException, InterruptedException {
         int parseLines = 0;
         int logged = 0;
 
@@ -62,6 +62,7 @@ public class Login {
         }
         if (logged == 1) {
             System.out.println("\n\n[PACIENTE] Logado com sucesso!\n");
+            sleep(500);
             return 1;
         } else {
             System.out.println("\n\nConta nao encontrada.\n");

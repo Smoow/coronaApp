@@ -25,4 +25,28 @@ public class MenuPrincipal {
         register = sc1.nextInt();
         return register;
     }
+
+    public void showSymptoms() {
+        System.out.println("=============================================");
+        System.out.println("Os principais sintomas da covid sao:");
+        System.out.println("1 - Febre         |    2 - Dor de cabeca");
+        System.out.println("3 - Tosse seca    |    4 -  Cansaco");
+        System.out.println("5 - Dor de cabeça |    6 -  Perda de paladar");
+        System.out.println("=============================================\n");
+    }
+
+    public int getSymptoms() {
+        Scanner sc1 = new Scanner(System.in);
+        String flag = "N";
+
+        System.out.println("[*] Voce esta sentindo algum dos sintomas? (S/N)");
+        sc1.next();
+        if (flag.toLowerCase().equals("n")) {
+            System.out.println("Obrigado pelas informacoes!!\nCuide-se!\n");
+            return 0;
+        } else {
+            System.out.println("..");
+        }
+        return 0;
+    }
 }
