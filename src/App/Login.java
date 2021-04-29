@@ -39,13 +39,15 @@ public class Login {
 
         String currentDirectory = System.getProperty("user.dir");
 
-        List<String> fileStream = Files.readAllLines(Paths.get(currentDirectory + "\\accounts.txt"));
+        List<String> fileStream = Files.readAllLines(Paths.get(currentDirectory + "\\pacientsAccounts.txt"));
         int noOfLines = fileStream.size();
 
-        Scanner scan = new Scanner(new File(currentDirectory + "/accounts.txt"));
+        Scanner scan = new Scanner(new File(currentDirectory + "/pacientsAccounts.txt"));
         Scanner keyboard = new Scanner(System.in);
 
+        System.out.println("Usuario:");
         String inpUser = keyboard.nextLine();
+        System.out.println("Senha:");
         String inpPass = keyboard.nextLine(); // gets input from user
 
         while (parseLines < (noOfLines / 2)) {
@@ -59,10 +61,10 @@ public class Login {
             parseLines++;
         }
         if (logged == 1) {
-            System.out.println("Logado com sucesso!\n");
+            System.out.println("\n\n[PACIENTE] Logado com sucesso!\n");
             return 1;
         } else {
-            System.out.println("Conta nao encontrada.\n");
+            System.out.println("\n\nConta nao encontrada.\n");
         }
         return 0;
     }
@@ -73,13 +75,15 @@ public class Login {
 
         String currentDirectory = System.getProperty("user.dir");
 
-        List<String> fileStream = Files.readAllLines(Paths.get(currentDirectory + "\\accounts.txt"));
+        List<String> fileStream = Files.readAllLines(Paths.get(currentDirectory + "\\staffAccounts.txt"));
         int noOfLines = fileStream.size();
 
-        Scanner scan = new Scanner(new File(currentDirectory + "/accounts.txt"));
+        Scanner scan = new Scanner(new File(currentDirectory + "/staffAccounts.txt"));
         Scanner keyboard = new Scanner(System.in);
 
+        System.out.println("Usuario:");
         String inpUser = keyboard.nextLine();
+        System.out.println("Senha:");
         String inpPass = keyboard.nextLine(); // gets input from user
 
         while (parseLines < (noOfLines / 2)) {
@@ -93,11 +97,11 @@ public class Login {
             parseLines++;
         }
         if (logged == 1) {
-            System.out.println("Logado com sucesso!\n");
+            System.out.println("\n\n[EQUIPE] Logado com sucesso!\n");
             return 1;
         } else {
-            System.out.println("Conta nao encontrada.\n");
+            System.out.println("\n\nConta nao encontrada.\n");
         }
-        return 0;
+        return 2;
     }
 }

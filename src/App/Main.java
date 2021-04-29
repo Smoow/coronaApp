@@ -38,21 +38,26 @@ public class Main {
                         logged = l1.runSaude();
                     }
 
+                    if (logged == 0) {
+                        register = menu.askRegister();
+                        switch (register) {
+                            case 1:
+                                Register.addPaciente(sc1, pacienteArrayList);
+                                break;
+
+                            case 2:
+                                System.out.println("Até mais!!");
+                                sleep(1000);
+                                return;
+                        }
+                    }
+
                     if (logged == 1) {
                         menuLoop = 0;
                         break;
                     }
 
-                    register = menu.askRegister();
-                    switch (register) {
-                        case 1:
-                            break;
-
-                        case 2:
-                            System.out.println("Até mais!!");
-                            sleep(1000);
-                            return;
-                    }
+                    break;
 
                     // Caso Registrar
                 case 2:

@@ -10,7 +10,7 @@ public class Paciente extends Usuario {
         this.id = ++Usuario.idCount;
 
         try {
-            FileWriter writer = new FileWriter("accounts.txt", true);
+            FileWriter writer = new FileWriter("pacientsAccounts.txt", true);
             writer.write(user + '\n');
             writer.write(pass + '\n');
             writer.close();
