@@ -2,8 +2,6 @@ package App;
 
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Scanner;
 
 public class Paciente extends Usuario {
     public Paciente(String user, String pass) {
