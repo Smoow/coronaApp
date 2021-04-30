@@ -1,5 +1,6 @@
 package App;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -23,13 +24,13 @@ public class MenuPaciente {
         while (exit == 0) {
 
             System.out.println("=============================================");
-            System.out.printf("Bem vindo, %s!\n", pacienteArrayList.get(account_ID - 1).getName());
+            System.out.printf("Bem vindo, %s!\n", pacienteArrayList.get(account_ID-4).getName());
             System.out.println("O que você deseja?\n");
             sleep(350);
             System.out.println("1 - Verificar e inserir sintomas");
             System.out.println("2 - Visualizar sintomas inseridos");
             System.out.println("3 - Visualizar mensagens disponíveis");
-            System.out.println("\n4 - Sair da conta");
+            System.out.println("\n0 - Sair da conta");
             int choice = sc1.nextInt();
 
             switch (choice) {
@@ -38,7 +39,7 @@ public class MenuPaciente {
                     break;
 
                 case 2:
-                    String sintomas_atuais = pacienteArrayList.get(account_ID-1).getSintomas();
+                    String sintomas_atuais = pacienteArrayList.get(account_ID-4).getSintomas();
                     System.out.println("=============================================");
 
                     // Caso não houver sintomas para o paciente
@@ -52,7 +53,7 @@ public class MenuPaciente {
                     break;
 
                 case 3:
-                    String mensagens_atuais = pacienteArrayList.get(account_ID-1).getMensagens();
+                    String mensagens_atuais = pacienteArrayList.get(account_ID-4).getMensagens();
                     System.out.println("=============================================");
 
                     // Caso não houver mensagens para o paciente
@@ -68,7 +69,7 @@ public class MenuPaciente {
                     sleep(300);
                     break;
 
-                case 4:
+                case 0:
                     System.out.println("\nAté mais!!");
                     sleep(300);
                     exit = 1;
@@ -92,11 +93,26 @@ public class MenuPaciente {
             while (true) {
                 tempSintomas = sc1.next();
                 if (tempSintomas.toLowerCase().equals("s")) {
-                    pacienteArrayList.get(account_ID-1).setSintomas(sintomas);
+                    pacienteArrayList.get(account_ID-4).setSintomas(sintomas);
                     return;
                 }
                 sintomas += tempSintomas + ", ";
             }
         }
+    }
+
+    public static void login(ArrayList<Paciente> pacienteArrayList) throws InterruptedException, IOException {
+        // Verificamos as credenciais
+        Login l1 = new Login();
+        int logged = l1.runPaciente(pacienteArrayList);
+        int account_ID = l1.getID; // Capturando ID do Paciente
+
+        // Caso as credenciais não conferem
+        if (logged == 0) {
+            return;
+        }
+
+        // Se conferir ok, mostramos as opções do menu do Paciente
+        showOptions(pacienteArrayList, account_ID);
     }
 }

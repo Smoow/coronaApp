@@ -8,8 +8,15 @@ import static java.lang.Thread.sleep;
 
 public class Main {
     public static void main(String[] args) throws IOException, InterruptedException {
-        Login l1 = new Login();
         ArrayList<Paciente> pacienteArrayList = new ArrayList<>();
+        ArrayList<EquipeSaude> equipeSaudeArrayList = new ArrayList<>();
+
+        // Como não deixamos o cadastro aberto para a Equipe de Saúde, inserimos contas manualmente
+        equipeSaudeArrayList.add(new EquipeSaude("Agente Saúde 01", "saude01", "saude_pass"));
+        equipeSaudeArrayList.add(new EquipeSaude("Agente Saúde 02", "saude02", "saude_pass"));
+        equipeSaudeArrayList.add(new EquipeSaude("Agente Saúde 03", "saude03", "saude_pass"));
+
+        Login l1 = new Login();
 
         // Menu Principal
         MenuPrincipal menu = new MenuPrincipal();
@@ -20,7 +27,6 @@ public class Main {
         int menuLoop = 1;
         int choice;
         int account;
-        int account_ID;
 
         // Menu principal
         while (menuLoop == 1) {
@@ -31,47 +37,14 @@ public class Main {
 
                 // Caso Login
                 case 1:
-                    int register;
-                    int logged;
-
                     // Verificando qual tipo de conta estará logando
                     account = l1.state();
 
                     // Se a conta for do tipo PACIENTE
                     if (account == 1) {
-
-                        // Verificamos as credenciais
-                        logged = l1.runPaciente(pacienteArrayList);
-                        account_ID = l1.getID; // Capturando ID do Paciente
-
-                        // Caso as credenciais não conferem
-                        if (logged == 0) {
-                            break;
-                        }
-
-                        // Se conferir ok, mostramos as opções do menu do Paciente
-                        MenuPaciente.showOptions(pacienteArrayList, account_ID);
+                        MenuPaciente.login(pacienteArrayList);
                     } else {
-                        logged = l1.runSaude();
-                    }
-
-                    if (logged == 0) {
-                        register = menu.askRegister();
-                        switch (register) {
-                            case 1:
-                                Register.addPaciente(sc1, pacienteArrayList);
-                                break;
-
-                            case 2:
-                                System.out.println("Até mais!!");
-                                sleep(1000);
-                                return;
-                        }
-                    }
-
-                    if (logged == 1) {
-                        menuLoop = 0;
-                        break;
+                        MenuEquipeSaude.login(equipeSaudeArrayList, pacienteArrayList);
                     }
 
                     break;
@@ -81,6 +54,11 @@ public class Main {
                     Register.addPaciente(sc1, pacienteArrayList);
                     break;
 
+                case 0:
+                    System.out.println("\n\nSaindo do sistema... Até mais!");
+                    sleep(300);
+                    menuLoop = 0;
+                    break;
 
                 default:
                     System.out.println("Opcao invalida...\nRetornando ao menu inicial.");

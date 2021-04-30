@@ -76,7 +76,7 @@ public class Login {
             // Checando credenciais - SEM PERSISTENCIA
             if (inpUser.equals(tempUser) && inpPass.equals(tempPass)) {
                 logged = 1;
-                getID = tempID;
+                this.getID = tempID;
                 break;
             }
         }
@@ -91,39 +91,36 @@ public class Login {
         }
     }
 
-    public int runSaude() throws IOException {
-        int parseLines = 0;
+    public int runSaude(ArrayList<EquipeSaude> equipeSaudeArrayList) throws IOException, InterruptedException {
         int logged = 0;
 
-        String currentDirectory = System.getProperty("user.dir");
+        // Método de checagem - SEM PERSISTENCIA (EM USO)
+        for (int counter = 0; counter < equipeSaudeArrayList.size(); counter++) {
+            int tempID = equipeSaudeArrayList.get(counter).getID();
+            String tempUser = equipeSaudeArrayList.get(counter).getUser();
+            String tempPass = equipeSaudeArrayList.get(counter).getPass();
 
-        List<String> fileStream = Files.readAllLines(Paths.get(currentDirectory + "\\staffAccounts.txt"));
-        int noOfLines = fileStream.size();
+            Scanner keyboard = new Scanner(System.in);
+            System.out.println("Usuario:");
+            String inpUser = keyboard.nextLine();
+            System.out.println("Senha:");
+            String inpPass = keyboard.nextLine(); // gets input from user
 
-        Scanner scan = new Scanner(new File(currentDirectory + "/staffAccounts.txt"));
-        Scanner keyboard = new Scanner(System.in);
-
-        System.out.println("Usuario:");
-        String inpUser = keyboard.nextLine();
-        System.out.println("Senha:");
-        String inpPass = keyboard.nextLine(); // gets input from user
-
-        while (parseLines < (noOfLines / 2)) {
-            String user = scan.nextLine();
-            String pass = scan.nextLine(); // looks at selected file in scan
-
-            if (inpUser.equals(user) && inpPass.equals(pass)) {
+            // Checando credenciais - SEM PERSISTENCIA
+            if (inpUser.equals(tempUser) && inpPass.equals(tempPass)) {
                 logged = 1;
+                this.getID = tempID;
                 break;
             }
-            parseLines++;
         }
+
         if (logged == 1) {
-            System.out.println("\n\n[EQUIPE] Logado com sucesso!\n");
+            System.out.println("\n\n[SAÚDE] Logado com sucesso!\n");
+            sleep(300);
             return 1;
         } else {
             System.out.println("\n\nConta nao encontrada.\n");
+            return 0;
         }
-        return 2;
     }
 }

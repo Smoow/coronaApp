@@ -118,6 +118,7 @@ public class Paciente extends Usuario {
     }
 
     public void getInfo() {
+        System.out.println("---------------------------------");
         System.out.printf("ID: %d\n", getID());
         System.out.printf("CPF: %s\n", getCpf());
         System.out.printf("Nome: %s\n", getName());
@@ -126,7 +127,7 @@ public class Paciente extends Usuario {
         System.out.printf("Estado: %s\n", getEstado());
         System.out.printf("Sintomas: %s\n", getSintomas());
         System.out.printf("Username: %s\n", getUser());
-        System.out.printf("Pass: %s\n\n", getPass());
+        System.out.println("---------------------------------\n");
     }
 
 
