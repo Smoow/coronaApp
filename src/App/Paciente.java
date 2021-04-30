@@ -9,6 +9,7 @@ public class Paciente extends Usuario {
     private String cidade;
     private String estado;
     private String sintomas;
+    private String mensagens;
 
 
 
@@ -22,25 +23,22 @@ public class Paciente extends Usuario {
         this.cidade = cidade;
         this.estado = estado;
 
-        try {
-            FileWriter writer = new FileWriter("pacientsAccounts.txt", true);
-            writer.write(user + '\n');
-            writer.write(pass + '\n');
+        // Parte de escrita em arquivos - PERSISTENCIA
+//        try {
+//            FileWriter writer = new FileWriter("pacientsAccounts.txt", true);
+//            writer.write(user + '\n');
+//            writer.write(pass + '\n');
 //            writer.write(name + '\n');
 //            writer.write(cpf + '\n');
 //            writer.write(telefone + '\n');
 //            writer.write(cidade + '\n');
 //            writer.write(estado + '\n');
-            writer.close();
-            System.out.println("Successfully wrote to the file.");
-        } catch (IOException e) {
-            System.out.println("An error occurred.");
-            e.printStackTrace();
-        }
-    }
-
-    private String toString(int id) {
-        return toString(id);
+//            writer.close();
+//            System.out.println("Successfully wrote to the file.");
+//        } catch (IOException e) {
+//            System.out.println("An error occurred.");
+//            e.printStackTrace();
+//        }
     }
 
     public void setName(String name) {
@@ -75,6 +73,10 @@ public class Paciente extends Usuario {
         this.sintomas = sintomas;
     }
 
+    public void setMensagens(String mensagens) {
+        this.mensagens = mensagens;
+    }
+
     public int getID() {
         return this.id;
     }
@@ -92,23 +94,27 @@ public class Paciente extends Usuario {
     }
 
     public String getCpf() {
-        return cpf;
+        return this.cpf;
     }
 
     public String getTelefone() {
-        return telefone;
+        return this.telefone;
     }
 
     public String getCidade() {
-        return cidade;
+        return this.cidade;
     }
 
     public String getEstado() {
-        return estado;
+        return this.estado;
     }
 
     public String getSintomas() {
-        return sintomas;
+        return this.sintomas;
+    }
+
+    public String getMensagens() {
+        return this.mensagens;
     }
 
     public void getInfo() {

@@ -4,12 +4,16 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 import static java.lang.Thread.sleep;
 
 public class Login {
+
+    public int getID;
+
     public int state() throws InterruptedException {
         // return 1 = paciente | return 2 = saude
         int account;
@@ -33,10 +37,12 @@ public class Login {
                 }
         }
     }
-    public int runPaciente() throws IOException, InterruptedException {
+    public int runPaciente(ArrayList<Paciente> pacienteArrayList) throws IOException, InterruptedException {
         int parseLines = 0;
         int logged = 0;
 
+
+        // Método de checagem - COM PERSISTENCIA (NAO ESTÁ SENDO UTILIZADO NO MOMENTO)
         String currentDirectory = System.getProperty("user.dir");
 
         List<String> fileStream = Files.readAllLines(Paths.get(currentDirectory + "\\pacientsAccounts.txt"));
@@ -60,14 +66,29 @@ public class Login {
             }
             parseLines++;
         }
+
+        // Método de checagem - SEM PERSISTENCIA (EM USO)
+        for (int counter = 0; counter < pacienteArrayList.size(); counter++) {
+            int tempID = pacienteArrayList.get(counter).getID();
+            String tempUser = pacienteArrayList.get(counter).getUser();
+            String tempPass = pacienteArrayList.get(counter).getPass();
+
+            // Checando credenciais - SEM PERSISTENCIA
+            if (inpUser.equals(tempUser) && inpPass.equals(tempPass)) {
+                logged = 1;
+                getID = tempID;
+                break;
+            }
+        }
+
         if (logged == 1) {
             System.out.println("\n\n[PACIENTE] Logado com sucesso!\n");
-            sleep(500);
+            sleep(300);
             return 1;
         } else {
             System.out.println("\n\nConta nao encontrada.\n");
+            return 0;
         }
-        return 0;
     }
 
     public int runSaude() throws IOException {

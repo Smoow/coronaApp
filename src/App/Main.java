@@ -16,9 +16,11 @@ public class Main {
 
         // Scanner para leitura futura
         Scanner sc1 = new Scanner(System.in).useDelimiter("\n");
+
         int menuLoop = 1;
-        int choice = 0;
+        int choice;
         int account;
+        int account_ID;
 
         // Menu principal
         while (menuLoop == 1) {
@@ -26,17 +28,29 @@ public class Main {
 
             choice = sc1.nextInt();
             switch (choice) {
+
                 // Caso Login
                 case 1:
-                    int register = 0;
-                    int logged = 0;
+                    int register;
+                    int logged;
 
+                    // Verificando qual tipo de conta estará logando
                     account = l1.state();
+
+                    // Se a conta for do tipo PACIENTE
                     if (account == 1) {
-                        logged = l1.runPaciente();
-                        menu.showSymptoms();
-                        String sintomas = menu.getSymptomsInfo();
-                        System.out.printf("SINTOMAS: %s", sintomas);
+
+                        // Verificamos as credenciais
+                        logged = l1.runPaciente(pacienteArrayList);
+                        account_ID = l1.getID; // Capturando ID do Paciente
+
+                        // Caso as credenciais não conferem
+                        if (logged == 0) {
+                            break;
+                        }
+
+                        // Se conferir ok, mostramos as opções do menu do Paciente
+                        MenuPaciente.showOptions(pacienteArrayList, account_ID);
                     } else {
                         logged = l1.runSaude();
                     }
@@ -62,7 +76,7 @@ public class Main {
 
                     break;
 
-                    // Caso Registrar
+                // Caso Registrar
                 case 2:
                     Register.addPaciente(sc1, pacienteArrayList);
                     break;
@@ -72,12 +86,6 @@ public class Main {
                     System.out.println("Opcao invalida...\nRetornando ao menu inicial.");
                     sleep(1000);
             }
-
-
         }
-
-
     }
-
-
 }
