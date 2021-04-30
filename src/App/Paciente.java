@@ -26,12 +26,21 @@ public class Paciente extends Usuario {
             FileWriter writer = new FileWriter("pacientsAccounts.txt", true);
             writer.write(user + '\n');
             writer.write(pass + '\n');
+//            writer.write(name + '\n');
+//            writer.write(cpf + '\n');
+//            writer.write(telefone + '\n');
+//            writer.write(cidade + '\n');
+//            writer.write(estado + '\n');
             writer.close();
             System.out.println("Successfully wrote to the file.");
         } catch (IOException e) {
             System.out.println("An error occurred.");
             e.printStackTrace();
         }
+    }
+
+    private String toString(int id) {
+        return toString(id);
     }
 
     public void setName(String name) {

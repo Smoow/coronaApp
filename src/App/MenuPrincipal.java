@@ -35,18 +35,26 @@ public class MenuPrincipal {
         System.out.println("=============================================\n");
     }
 
-    public int getSymptoms() {
+    public String getSymptomsInfo() {
         Scanner sc1 = new Scanner(System.in);
-        String flag = "N";
+        String flag;
 
         System.out.println("[*] Voce esta sentindo algum dos sintomas? (S/N)");
-        sc1.next();
+        flag = sc1.next();
         if (flag.toLowerCase().equals("n")) {
             System.out.println("Obrigado pelas informacoes!!\nCuide-se!\n");
-            return 0;
+            return "";
         } else {
-            System.out.println("..");
+            String tempSintomas = ".";
+            String sintomas = "";
+            System.out.println("Quais? (INFORME 1 PALAVRA POR VEZ) - Digite S para enviar");
+            while (true) {
+                tempSintomas = sc1.next();
+                if (tempSintomas.toLowerCase().equals("s")) {
+                    return sintomas;
+                }
+                sintomas += tempSintomas + ", ";
+            }
         }
-        return 0;
     }
 }

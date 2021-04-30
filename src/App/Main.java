@@ -15,7 +15,7 @@ public class Main {
         MenuPrincipal menu = new MenuPrincipal();
 
         // Scanner para leitura futura
-        Scanner sc1 = new Scanner(System.in);
+        Scanner sc1 = new Scanner(System.in).useDelimiter("\n");
         int menuLoop = 1;
         int choice = 0;
         int account;
@@ -35,7 +35,8 @@ public class Main {
                     if (account == 1) {
                         logged = l1.runPaciente();
                         menu.showSymptoms();
-                        menu.getSymptoms();
+                        String sintomas = menu.getSymptomsInfo();
+                        System.out.printf("SINTOMAS: %s", sintomas);
                     } else {
                         logged = l1.runSaude();
                     }
