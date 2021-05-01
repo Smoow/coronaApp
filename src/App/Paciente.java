@@ -2,6 +2,7 @@ package App;
 
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.Serializable;
 
 public class Paciente extends Usuario {
     private String cpf;
@@ -26,6 +27,7 @@ public class Paciente extends Usuario {
         // Parte de escrita em arquivos - PERSISTENCIA
 //        try {
 //            FileWriter writer = new FileWriter("pacientsAccounts.txt", true);
+//            writer.write(id + '\n');
 //            writer.write(user + '\n');
 //            writer.write(pass + '\n');
 //            writer.write(name + '\n');
