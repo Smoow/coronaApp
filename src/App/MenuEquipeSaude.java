@@ -22,14 +22,14 @@ public class MenuEquipeSaude {
         showOptions(equipeSaudeArrayList, account_ID, pacienteArrayList);
     }
 
-    private static void showOptions(ArrayList<EquipeSaude> equipeSaudeArrayList, int account_id, ArrayList<Paciente> pacienteArrayList) throws InterruptedException {
+    private static void showOptions(ArrayList<EquipeSaude> equipeSaudeArrayList, int account_id, ArrayList<Paciente> pacienteArrayList) throws InterruptedException, IOException {
         Scanner sc1 = new Scanner(System.in);
         int exit = 0;
 
         while (exit == 0) {
 
             System.out.println("=============================================");
-            System.out.printf("Bem vindo, %s!\n", equipeSaudeArrayList.get(account_id-1).getName());
+            System.out.printf("Bem vindo, %s!\n", equipeSaudeArrayList.get(account_id-pacienteArrayList.size()-1).getName());
             System.out.println("O que você deseja?\n");
             sleep(350);
             System.out.println("1 - Consultar pacientes");

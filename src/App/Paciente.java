@@ -1,10 +1,12 @@
 package App;
 
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.Serializable;
+import java.io.*;
+import java.util.ArrayList;
+import java.util.Scanner;
 
-public class Paciente extends Usuario {
+public class Paciente extends Usuario implements Serializable {
+    private static final long serialVersionUID = 6529685098267757690L;
+
     private String cpf;
     private String telefone;
     private String cidade;
@@ -14,7 +16,7 @@ public class Paciente extends Usuario {
 
 
 
-    public Paciente(String name, String user, String pass, String cpf, String telefone, String cidade, String estado) {
+    public Paciente(String name, String user, String pass, String cpf, String telefone, String cidade, String estado, String sintomas, String msg) {
         this.id = ++Usuario.idCount;
         this.name = name;
         this.username = user;
@@ -24,23 +26,18 @@ public class Paciente extends Usuario {
         this.cidade = cidade;
         this.estado = estado;
 
-        // Parte de escrita em arquivos - PERSISTENCIA
-//        try {
-//            FileWriter writer = new FileWriter("pacientsAccounts.txt", true);
-//            writer.write(id + '\n');
-//            writer.write(user + '\n');
-//            writer.write(pass + '\n');
-//            writer.write(name + '\n');
-//            writer.write(cpf + '\n');
-//            writer.write(telefone + '\n');
-//            writer.write(cidade + '\n');
-//            writer.write(estado + '\n');
-//            writer.close();
-//            System.out.println("Successfully wrote to the file.");
-//        } catch (IOException e) {
-//            System.out.println("An error occurred.");
-//            e.printStackTrace();
-//        }
+        if (sintomas.isEmpty() || sintomas.isBlank()) {
+            this.sintomas = " ";
+        } else {
+            this.sintomas = sintomas;
+        }
+
+        if (msg.isEmpty() || msg.isBlank()) {
+            this.mensagens = " ";
+        } else {
+            this.mensagens = msg;
+        }
+
     }
 
     public void setName(String name) {
@@ -132,5 +129,68 @@ public class Paciente extends Usuario {
         System.out.println("---------------------------------\n");
     }
 
+    public static void saveAll(ArrayList<Paciente> pacienteArrayList) throws IOException {
+
+        String currentDirectory = System.getProperty("user.dir");
+
+        File file1 = new File(currentDirectory + "/pacientsAccounts.txt");
+        FileWriter fw_tmp = new FileWriter(file1, false);
+        PrintWriter pw = new PrintWriter(fw_tmp);
+
+        fw_tmp.close();
+
+        pw.print("");
+
+        for (int counter = 0; counter < pacienteArrayList.size(); counter++) {
+            String outputText = pacienteArrayList.get(counter).getName() + "|" + pacienteArrayList.get(counter).getUser() + "|" + pacienteArrayList.get(counter).getPass()
+                    + "|" + pacienteArrayList.get(counter).getCpf() + "|" + pacienteArrayList.get(counter).getTelefone() + "|" + pacienteArrayList.get(counter).getCidade()
+                    + "|" + pacienteArrayList.get(counter).getEstado() + "|" + pacienteArrayList.get(counter).getSintomas()
+                    + "|" + pacienteArrayList.get(counter).getMensagens() + "|";
+
+            FileWriter fw = new FileWriter(file1, true);
+            PrintWriter pw_final = new PrintWriter(fw);
+
+            pw_final.println(outputText);
+            pw.close();
+            fw.close();
+        }
+
+
+    }
+
+    public static ArrayList<Paciente> loadAll() throws IOException, ClassNotFoundException {
+
+        String currentDirectory = System.getProperty("user.dir");
+
+        File file = new File(currentDirectory + "/pacientsAccounts.txt");
+        Scanner sc1 = new Scanner(file);
+
+        ArrayList<Paciente> pacienteArrayList = new ArrayList<Paciente>();
+
+        while (sc1.hasNextLine()) {
+            String line = sc1.nextLine();
+
+            String[] items = line.split("\\|");
+
+            // Colocar nos objetos
+            String name = items[0];
+            String user = items[1];
+            String pass = items[2];
+            String cpf = items[3];
+            String telefone = items[4];
+            String cidade = items[5];
+            String estado = items[6];
+            String sintomas = items[7];
+            String mensagens = items[8];
+
+
+
+            Paciente pc = new Paciente(name, user, pass, cpf, telefone, cidade, estado, sintomas, mensagens);
+            pacienteArrayList.add(pc);
+        }
+
+
+        return pacienteArrayList;
+    }
 
 }

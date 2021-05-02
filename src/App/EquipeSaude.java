@@ -1,5 +1,6 @@
 package App;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Locale;
 import java.util.Scanner;
@@ -93,7 +94,7 @@ public class EquipeSaude extends Usuario {
                     switch (choice_sintoma) {
                         case 1:
                             for (int counter = 0; counter < pacienteArrayList.size(); counter++) {
-                                if (pacienteArrayList.get(counter).getSintomas() != null) {
+                                if (pacienteArrayList.get(counter).getSintomas().length() > 4) {
                                     pacienteArrayList.get(counter).getInfo();
                                 }
                             }
@@ -129,7 +130,7 @@ public class EquipeSaude extends Usuario {
         }
     }
 
-    public static void inserirMensagem(ArrayList<Paciente> pacienteArrayList) {
+    public static void inserirMensagem(ArrayList<Paciente> pacienteArrayList) throws IOException {
         int flag = 0;
         System.out.println("Pacientes cadastrados:");
 
@@ -165,7 +166,9 @@ public class EquipeSaude extends Usuario {
         }
 
         String msg_nova = sc1.next();
-        msg_nova = msg_nova + "\n\n" + msg;
+        msg_nova = msg_nova + ":" + msg;
         pacienteArrayList.get(id_atual).setMensagens(msg_nova);
+        Paciente.saveAll(pacienteArrayList);
+
     }
 }

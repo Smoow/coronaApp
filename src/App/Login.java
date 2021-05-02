@@ -38,17 +38,8 @@ public class Login {
         }
     }
     public int runPaciente(ArrayList<Paciente> pacienteArrayList) throws IOException, InterruptedException {
-        int parseLines = 0;
         int logged = 0;
 
-
-        // Método de checagem - COM PERSISTENCIA (NAO ESTÁ SENDO UTILIZADO NO MOMENTO)
-        String currentDirectory = System.getProperty("user.dir");
-
-        List<String> fileStream = Files.readAllLines(Paths.get(currentDirectory + "\\pacientsAccounts.txt"));
-        int noOfLines = fileStream.size();
-
-        Scanner scan = new Scanner(new File(currentDirectory + "/pacientsAccounts.txt"));
         Scanner keyboard = new Scanner(System.in);
 
         System.out.println("Usuario:");
@@ -56,16 +47,6 @@ public class Login {
         System.out.println("Senha:");
         String inpPass = keyboard.nextLine(); // gets input from user
 
-        while (parseLines < (noOfLines / 2)) {
-            String user = scan.nextLine();
-            String pass = scan.nextLine(); // looks at selected file in scan
-
-            if (inpUser.equals(user) && inpPass.equals(pass)) {
-                logged = 1;
-                break;
-            }
-            parseLines++;
-        }
 
         // Método de checagem - SEM PERSISTENCIA (EM USO)
         for (int counter = 0; counter < pacienteArrayList.size(); counter++) {

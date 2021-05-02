@@ -7,7 +7,7 @@ import java.util.Scanner;
 import static java.lang.Thread.sleep;
 
 public class MenuPaciente {
-    public static void showSymptoms(ArrayList<Paciente> pacienteArrayList, int account_ID) {
+    public static void showSymptoms(ArrayList<Paciente> pacienteArrayList, int account_ID) throws IOException {
         System.out.println("=============================================");
         System.out.println("Os principais sintomas da covid sao:");
         System.out.println("1 - Febre         |    2 - Dor de cabeca");
@@ -17,14 +17,14 @@ public class MenuPaciente {
         getSymptomsInfo(pacienteArrayList, account_ID);
     }
 
-    public static void showOptions(ArrayList<Paciente> pacienteArrayList, int account_ID) throws InterruptedException {
+    public static void showOptions(ArrayList<Paciente> pacienteArrayList, int account_ID) throws InterruptedException, IOException {
         Scanner sc1 = new Scanner(System.in);
         int exit = 0;
 
         while (exit == 0) {
 
             System.out.println("=============================================");
-            System.out.printf("Bem vindo, %s!\n", pacienteArrayList.get(account_ID-4).getName());
+            System.out.printf("Bem vindo, %s!\n", pacienteArrayList.get(account_ID-1).getName());
             System.out.println("O que você deseja?\n");
             sleep(350);
             System.out.println("1 - Verificar e inserir sintomas");
@@ -39,7 +39,7 @@ public class MenuPaciente {
                     break;
 
                 case 2:
-                    String sintomas_atuais = pacienteArrayList.get(account_ID-4).getSintomas();
+                    String sintomas_atuais = pacienteArrayList.get(account_ID-1).getSintomas();
                     System.out.println("=============================================");
 
                     // Caso não houver sintomas para o paciente
@@ -53,11 +53,11 @@ public class MenuPaciente {
                     break;
 
                 case 3:
-                    String mensagens_atuais = pacienteArrayList.get(account_ID-4).getMensagens();
+                    String mensagens_atuais = pacienteArrayList.get(account_ID-1).getMensagens();
                     System.out.println("=============================================");
 
                     // Caso não houver mensagens para o paciente
-                    if (mensagens_atuais == null) {
+                    if (mensagens_atuais.length() < 3) {
                         System.out.println("Não há mensagens disponíveis");
                         sleep(300);
                         break;
@@ -65,7 +65,10 @@ public class MenuPaciente {
 
                     // Se houver mensagens para o paciente
                     System.out.println("Mensagens disponíveis:");
-                    System.out.printf("%s", mensagens_atuais);
+                    String mensagens[] = mensagens_atuais.split(":");
+                    for (int counter = 0; counter < mensagens.length; counter++) {
+                        System.out.printf("%s\n", mensagens[counter]);
+                    }
                     sleep(300);
                     break;
 
@@ -78,7 +81,7 @@ public class MenuPaciente {
         }
     }
 
-    public static void getSymptomsInfo(ArrayList<Paciente> pacienteArrayList, int account_ID) {
+    public static void getSymptomsInfo(ArrayList<Paciente> pacienteArrayList, int account_ID) throws IOException {
         Scanner sc1 = new Scanner(System.in).useDelimiter("\n");
         String flag;
 
@@ -93,7 +96,8 @@ public class MenuPaciente {
             while (true) {
                 tempSintomas = sc1.next();
                 if (tempSintomas.toLowerCase().equals("s")) {
-                    pacienteArrayList.get(account_ID-4).setSintomas(sintomas);
+                    pacienteArrayList.get(account_ID-1).setSintomas(sintomas);
+                    Paciente.saveAll(pacienteArrayList);
                     return;
                 }
                 sintomas += tempSintomas + ", ";

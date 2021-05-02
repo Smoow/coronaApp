@@ -7,9 +7,13 @@ import java.util.Scanner;
 import static java.lang.Thread.sleep;
 
 public class Main {
-    public static void main(String[] args) throws IOException, InterruptedException {
+    public static void main(String[] args) throws IOException, InterruptedException, ClassNotFoundException {
         ArrayList<Paciente> pacienteArrayList = new ArrayList<>();
         ArrayList<EquipeSaude> equipeSaudeArrayList = new ArrayList<>();
+
+        // Carregando dados de pacientes já cadastrados
+        pacienteArrayList = Paciente.loadAll();
+
 
         // Como não deixamos o cadastro aberto para a Equipe de Saúde, inserimos contas manualmente
         equipeSaudeArrayList.add(new EquipeSaude("Agente Saúde 01", "saude01", "saude_pass"));
@@ -51,7 +55,9 @@ public class Main {
 
                 // Caso Registrar
                 case 2:
+                    // Registrando e salvando o novo paciente cadastrado
                     Register.addPaciente(sc1, pacienteArrayList);
+                    Paciente.saveAll(pacienteArrayList);
                     break;
 
                 case 0:

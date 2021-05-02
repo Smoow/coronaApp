@@ -24,7 +24,7 @@ public class Register {
         System.out.println("Escolha uma senha: ");
         String tempPass = scanner.next();
 
-        pacienteArrayList.add(new Paciente(tempName, tempUser, tempPass, tempCPF, tempTel, tempCity, tempState));
+        pacienteArrayList.add(new Paciente(tempName, tempUser, tempPass, tempCPF, tempTel, tempCity, tempState, "", ""));
         System.out.println("\nCadastrado com sucesso!");
         sleep(1000);
 
