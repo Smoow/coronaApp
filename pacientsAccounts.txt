@@ -1,2 +1,2 @@
-Pedro H C|Smoow|1010|11122233344455|17-999999999|Catanduva|SP|Febre, Cansaco, |Mensagem teste =]: |
-Luiz Carlos|Luiz|1010|5192392929|19-9393939393|Campinas|SP|Dor de cabeca, Tosse seca, Perda de paladar, | |
+Pedro H C|Smoow|1010|11122233344455|17-999999999|Catanduva|SP|Dor de cabeca, Cansaco, |Mensagem teste =]: |
+Luiz Carlos|Luiz|1010|5192392929|19-9393939393|Campinas|SP|Dor de cabeca, Tosse seca, Perda de paladar, |[VISITAÇÃO] Visita agendada para 05/05/2021: |

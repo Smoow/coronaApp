@@ -14,32 +14,12 @@ public class EquipeSaude extends Usuario {
         this.password = pass;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setUser(String user) {
-        this.username = user;
-    }
-
     public void setPass(String pass) {
         this.password = pass;
     }
 
     public int getID() {
         return this.id;
-    }
-
-    public String getName() {
-        return this.name;
-    }
-
-    public String getUser() {
-        return this.username;
-    }
-
-    public String getPass() {
-        return this.password;
     }
 
     public static void consultarPaciente(ArrayList<Paciente> pacienteArrayList) {
@@ -134,9 +114,9 @@ public class EquipeSaude extends Usuario {
         int flag = 0;
         System.out.println("Pacientes cadastrados:");
 
-        for (int counter = 0; counter < pacienteArrayList.size(); counter++) {
+        for (Paciente paciente : pacienteArrayList) {
             System.out.println("--------------------------------------------------------");
-            System.out.printf("ID: %d | Nome: %s | Telefone: %s\n", pacienteArrayList.get(counter).getID(), pacienteArrayList.get(counter).getName(), pacienteArrayList.get(counter).getTelefone());
+            System.out.printf("ID: %d | Nome: %s | Telefone: %s\n", paciente.getID(), paciente.getName(), paciente.getTelefone());
             System.out.println("--------------------------------------------------------");
         }
 

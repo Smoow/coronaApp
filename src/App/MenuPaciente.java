@@ -31,8 +31,8 @@ public class MenuPaciente {
             System.out.println("2 - Visualizar sintomas inseridos");
             System.out.println("3 - Visualizar mensagens disponíveis");
             System.out.println("\n0 - Sair da conta");
-            int choice = sc1.nextInt();
 
+            int choice = sc1.nextInt();
             switch (choice) {
                 case 1:
                     showSymptoms(pacienteArrayList, account_ID);
@@ -43,7 +43,7 @@ public class MenuPaciente {
                     System.out.println("=============================================");
 
                     // Caso não houver sintomas para o paciente
-                    if (sintomas_atuais == null) {
+                    if (sintomas_atuais.length() < 3) {
                         System.out.println("Sem sintomas registrados");
                         sleep(300);
                         break;
@@ -65,9 +65,9 @@ public class MenuPaciente {
 
                     // Se houver mensagens para o paciente
                     System.out.println("Mensagens disponíveis:");
-                    String mensagens[] = mensagens_atuais.split(":");
-                    for (int counter = 0; counter < mensagens.length; counter++) {
-                        System.out.printf("%s\n", mensagens[counter]);
+                    String[] mensagens = mensagens_atuais.split(":");
+                    for (String mensagem : mensagens) {
+                        System.out.printf("%s\n", mensagem);
                     }
                     sleep(300);
                     break;
@@ -87,20 +87,20 @@ public class MenuPaciente {
 
         System.out.println("[*] Voce esta sentindo algum dos sintomas? (S/N)");
         flag = sc1.next();
-        if (flag.toLowerCase().equals("n")) {
+        if (flag.equalsIgnoreCase("n")) {
             System.out.println("Obrigado pelas informacoes!!\nCuide-se!\n");
         } else {
             String tempSintomas = "";
-            String sintomas = "";
+            StringBuilder sintomas = new StringBuilder();
             System.out.println("Quais? (INFORME 1 PALAVRA POR VEZ) - Digite S para enviar");
             while (true) {
                 tempSintomas = sc1.next();
-                if (tempSintomas.toLowerCase().equals("s")) {
-                    pacienteArrayList.get(account_ID-1).setSintomas(sintomas);
+                if (tempSintomas.equalsIgnoreCase("s")) {
+                    pacienteArrayList.get(account_ID-1).setSintomas(sintomas.toString());
                     Paciente.saveAll(pacienteArrayList);
                     return;
                 }
-                sintomas += tempSintomas + ", ";
+                sintomas.append(tempSintomas).append(", ");
             }
         }
     }

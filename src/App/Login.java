@@ -1,11 +1,6 @@
 package App;
 
-import java.io.File;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 import static java.lang.Thread.sleep;
@@ -37,7 +32,7 @@ public class Login {
                 }
         }
     }
-    public int runPaciente(ArrayList<Paciente> pacienteArrayList) throws IOException, InterruptedException {
+    public int runPaciente(ArrayList<Paciente> pacienteArrayList) throws InterruptedException {
         int logged = 0;
 
         Scanner keyboard = new Scanner(System.in);
@@ -48,13 +43,13 @@ public class Login {
         String inpPass = keyboard.nextLine(); // gets input from user
 
 
-        // Método de checagem - SEM PERSISTENCIA (EM USO)
-        for (int counter = 0; counter < pacienteArrayList.size(); counter++) {
-            int tempID = pacienteArrayList.get(counter).getID();
-            String tempUser = pacienteArrayList.get(counter).getUser();
-            String tempPass = pacienteArrayList.get(counter).getPass();
+        // Método de checagem
+        for (Paciente paciente : pacienteArrayList) {
+            int tempID = paciente.getID();
+            String tempUser = paciente.getUser();
+            String tempPass = paciente.getPass();
 
-            // Checando credenciais - SEM PERSISTENCIA
+            // Checando credenciais
             if (inpUser.equals(tempUser) && inpPass.equals(tempPass)) {
                 logged = 1;
                 this.getID = tempID;
@@ -72,14 +67,14 @@ public class Login {
         }
     }
 
-    public int runSaude(ArrayList<EquipeSaude> equipeSaudeArrayList) throws IOException, InterruptedException {
+    public int runSaude(ArrayList<EquipeSaude> equipeSaudeArrayList) throws InterruptedException {
         int logged = 0;
 
-        // Método de checagem - SEM PERSISTENCIA (EM USO)
-        for (int counter = 0; counter < equipeSaudeArrayList.size(); counter++) {
-            int tempID = equipeSaudeArrayList.get(counter).getID();
-            String tempUser = equipeSaudeArrayList.get(counter).getUser();
-            String tempPass = equipeSaudeArrayList.get(counter).getPass();
+        // Método de checagem
+        for (EquipeSaude equipeSaude : equipeSaudeArrayList) {
+            int tempID = equipeSaude.getID();
+            String tempUser = equipeSaude.getUser();
+            String tempPass = equipeSaude.getPass();
 
             Scanner keyboard = new Scanner(System.in);
             System.out.println("Usuario:");
@@ -87,7 +82,7 @@ public class Login {
             System.out.println("Senha:");
             String inpPass = keyboard.nextLine(); // gets input from user
 
-            // Checando credenciais - SEM PERSISTENCIA
+            // Checando credenciais
             if (inpUser.equals(tempUser) && inpPass.equals(tempPass)) {
                 logged = 1;
                 this.getID = tempID;

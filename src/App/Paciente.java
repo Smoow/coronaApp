@@ -4,8 +4,7 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class Paciente extends Usuario implements Serializable {
-    private static final long serialVersionUID = 6529685098267757690L;
+public class Paciente extends Usuario {
 
     private String cpf;
     private String telefone;
@@ -40,13 +39,6 @@ public class Paciente extends Usuario implements Serializable {
 
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setUser(String user) {
-        this.username = user;
-    }
 
     public void setPass(String pass) {
         this.password = pass;
@@ -78,18 +70,6 @@ public class Paciente extends Usuario implements Serializable {
 
     public int getID() {
         return this.id;
-    }
-
-    public String getName() {
-        return this.name;
-    }
-
-    public String getUser() {
-        return this.username;
-    }
-
-    public String getPass() {
-        return this.password;
     }
 
     public String getCpf() {
@@ -131,6 +111,7 @@ public class Paciente extends Usuario implements Serializable {
 
     public static void saveAll(ArrayList<Paciente> pacienteArrayList) throws IOException {
 
+        // Obtendo o diretório atual
         String currentDirectory = System.getProperty("user.dir");
 
         File file1 = new File(currentDirectory + "/pacientsAccounts.txt");
@@ -141,11 +122,13 @@ public class Paciente extends Usuario implements Serializable {
 
         pw.print("");
 
-        for (int counter = 0; counter < pacienteArrayList.size(); counter++) {
-            String outputText = pacienteArrayList.get(counter).getName() + "|" + pacienteArrayList.get(counter).getUser() + "|" + pacienteArrayList.get(counter).getPass()
-                    + "|" + pacienteArrayList.get(counter).getCpf() + "|" + pacienteArrayList.get(counter).getTelefone() + "|" + pacienteArrayList.get(counter).getCidade()
-                    + "|" + pacienteArrayList.get(counter).getEstado() + "|" + pacienteArrayList.get(counter).getSintomas()
-                    + "|" + pacienteArrayList.get(counter).getMensagens() + "|";
+        for (Paciente paciente : pacienteArrayList) {
+            String outputText = paciente.getName()
+                    + "|" + paciente.getUser() + "|" + paciente.getPass()
+                    + "|" + paciente.getCpf() + "|" + paciente.getTelefone()
+                    + "|" + paciente.getCidade() + "|" + paciente.getEstado()
+                    + "|" + paciente.getSintomas() + "|" + paciente.getMensagens()
+                    + "|";
 
             FileWriter fw = new FileWriter(file1, true);
             PrintWriter pw_final = new PrintWriter(fw);
@@ -158,7 +141,7 @@ public class Paciente extends Usuario implements Serializable {
 
     }
 
-    public static ArrayList<Paciente> loadAll() throws IOException, ClassNotFoundException {
+    public static ArrayList<Paciente> loadAll() throws IOException {
 
         String currentDirectory = System.getProperty("user.dir");
 
