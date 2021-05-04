@@ -2,7 +2,6 @@ package App;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Locale;
 import java.util.Scanner;
 
 public class EquipeSaude extends Usuario {
@@ -12,14 +11,6 @@ public class EquipeSaude extends Usuario {
         this.name = name;
         this.username = user;
         this.password = pass;
-    }
-
-    public void setPass(String pass) {
-        this.password = pass;
-    }
-
-    public int getID() {
-        return this.id;
     }
 
     public static void consultarPaciente(ArrayList<Paciente> pacienteArrayList) {
@@ -38,8 +29,8 @@ public class EquipeSaude extends Usuario {
 
             switch (choice) {
                 case 1:
-                    for (int counter = 0; counter < pacienteArrayList.size(); counter++) {
-                        pacienteArrayList.get(counter).getInfo();
+                    for (Paciente value : pacienteArrayList) {
+                        value.getInfo();
                     }
                     break;
 
@@ -47,9 +38,9 @@ public class EquipeSaude extends Usuario {
                     System.out.println("Por favor, digite a sigla do estado. (ex: SP)");
                     String estado = sc1.next();
 
-                    for (int counter = 0; counter < pacienteArrayList.size(); counter++) {
-                        if (pacienteArrayList.get(counter).getEstado().toLowerCase().equals(estado)) {
-                            pacienteArrayList.get(counter).getInfo();
+                    for (Paciente paciente : pacienteArrayList) {
+                        if (paciente.getEstado().equalsIgnoreCase(estado)) {
+                            paciente.getInfo();
                         }
                     }
                     break;
@@ -58,9 +49,9 @@ public class EquipeSaude extends Usuario {
                     System.out.println("Por favor, digite o nome da cidade ou parte do nome da cidade. (ex: Catanduva ou Catan)");
                     String cidade = sc1.next();
 
-                    for (int counter = 0; counter < pacienteArrayList.size(); counter++) {
-                        if (pacienteArrayList.get(counter).getCidade().toLowerCase().contains(cidade)) {
-                            pacienteArrayList.get(counter).getInfo();
+                    for (Paciente paciente : pacienteArrayList) {
+                        if (paciente.getCidade().toLowerCase().contains(cidade.toLowerCase())) {
+                            paciente.getInfo();
                         }
                     }
                     break;
@@ -73,9 +64,9 @@ public class EquipeSaude extends Usuario {
 
                     switch (choice_sintoma) {
                         case 1:
-                            for (int counter = 0; counter < pacienteArrayList.size(); counter++) {
-                                if (pacienteArrayList.get(counter).getSintomas().length() > 4) {
-                                    pacienteArrayList.get(counter).getInfo();
+                            for (Paciente paciente : pacienteArrayList) {
+                                if (paciente.getSintomas().length() > 4) {
+                                    paciente.getInfo();
                                 }
                             }
                             break;
@@ -90,9 +81,9 @@ public class EquipeSaude extends Usuario {
                             System.out.println("Qual? (Informe o nome ou começo do nome)");
                             String sintoma = sc1.next();
 
-                            for (int counter = 0; counter < pacienteArrayList.size(); counter++) {
-                                if (pacienteArrayList.get(counter).getSintomas().toLowerCase().contains(sintoma)) {
-                                    pacienteArrayList.get(counter).getInfo();
+                            for (Paciente paciente : pacienteArrayList) {
+                                if (paciente.getSintomas().toLowerCase().contains(sintoma.toLowerCase())) {
+                                    paciente.getInfo();
                                 }
                             }
                             break;

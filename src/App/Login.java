@@ -26,8 +26,8 @@ public class Login {
                 case 2:
                     return 2;
                 default:
-                    System.out.println("Opcao invalida\nTente novamente.");
-                    sleep(1000);
+                    System.out.println("\nOpcao invalida\nTente novamente.");
+                    sleep(600);
                     System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n");
                 }
         }
@@ -70,17 +70,19 @@ public class Login {
     public int runSaude(ArrayList<EquipeSaude> equipeSaudeArrayList) throws InterruptedException {
         int logged = 0;
 
+        Scanner keyboard = new Scanner(System.in);
+
+        System.out.println("Usuario:");
+        String inpUser = keyboard.nextLine();
+        System.out.println("Senha:");
+        String inpPass = keyboard.nextLine(); // gets input from user
+
+
         // Método de checagem
         for (EquipeSaude equipeSaude : equipeSaudeArrayList) {
             int tempID = equipeSaude.getID();
             String tempUser = equipeSaude.getUser();
             String tempPass = equipeSaude.getPass();
-
-            Scanner keyboard = new Scanner(System.in);
-            System.out.println("Usuario:");
-            String inpUser = keyboard.nextLine();
-            System.out.println("Senha:");
-            String inpPass = keyboard.nextLine(); // gets input from user
 
             // Checando credenciais
             if (inpUser.equals(tempUser) && inpPass.equals(tempPass)) {

@@ -40,10 +40,6 @@ public class Paciente extends Usuario {
     }
 
 
-    public void setPass(String pass) {
-        this.password = pass;
-    }
-
     public void setCpf(String cpf) {
         this.cpf = cpf;
     }
@@ -66,10 +62,6 @@ public class Paciente extends Usuario {
 
     public void setMensagens(String mensagens) {
         this.mensagens = mensagens;
-    }
-
-    public int getID() {
-        return this.id;
     }
 
     public String getCpf() {

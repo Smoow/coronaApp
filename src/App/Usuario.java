@@ -27,11 +27,11 @@ public abstract class Usuario {
         return password;
     }
 
-    public void setPassword(String password) {
+    public void setPass(String password) {
         this.password = password;
     }
 
-    public int getId() {
+    public int getID() {
         return id;
     }
 

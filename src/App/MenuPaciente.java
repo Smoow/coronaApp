@@ -23,6 +23,11 @@ public class MenuPaciente {
 
         while (exit == 0) {
 
+            // Solução para o caso de tentar logar em uma conta que acabou de registrar, sem fechar o sistema e voltar.
+            if (account_ID > pacienteArrayList.size()) {
+                account_ID = pacienteArrayList.size();
+            }
+
             System.out.println("=============================================");
             System.out.printf("Bem vindo, %s!\n", pacienteArrayList.get(account_ID-1).getName());
             System.out.println("O que você deseja?\n");
